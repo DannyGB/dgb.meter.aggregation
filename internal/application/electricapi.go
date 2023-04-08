@@ -25,7 +25,7 @@ func (api *ElecApi) upsert(w http.ResponseWriter, r *http.Request, method string
 
 	s := string(fields)
 
-	req, _ := http.NewRequest(method, api.config.OIL_BACKEND+r.RequestURI, bytes.NewBuffer([]byte(s)))
+	req, _ := http.NewRequest(method, api.config.ELEC_BACKEND+r.RequestURI, bytes.NewBuffer([]byte(s)))
 	req.Header.Add("authorization", r.Header.Get("authorization"))
 	response, err := http.DefaultClient.Do(req)
 
@@ -67,6 +67,7 @@ func (api *ElecApi) create(w http.ResponseWriter, r *http.Request) {
 func (api *ElecApi) delete(w http.ResponseWriter, r *http.Request) {
 
 	req, _ := http.NewRequest(http.MethodDelete, api.config.ELEC_BACKEND+r.RequestURI, nil)
+	req.Header.Add("authorization", r.Header.Get("authorization"))
 	response, err := http.DefaultClient.Do(req)
 
 	if err != nil {

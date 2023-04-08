@@ -11,7 +11,7 @@ RUN go build -o meter.aggregation .
 FROM golang:1.19.1 AS final
 
 RUN mkdir -p /app/agg/cmd
-WORKDIR /app/elec/cmd
+WORKDIR /app/agg/cmd
 
 COPY --from=build /app/agg/cmd/meter.aggregation .
 
@@ -30,4 +30,4 @@ ENV AGGREGATION_OIL_BACKEND $OIL_BACKEND
 ARG CORS_CLIENTS="*"
 ENV AGGREGATION_CORS_CLIENTS $CORS_CLIENTS
 
-CMD [ "/app/elec/cmd/meter.aggregation" ]
+CMD [ "/app/agg/cmd/meter.aggregation" ]
